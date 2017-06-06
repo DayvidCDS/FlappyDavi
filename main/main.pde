@@ -4,13 +4,15 @@ class Obj {
   private color cor;
   private int posicaoX;
   private int posicaoY;
+  private PImage img;
   
-  Obj(int plado, int paltura, color pcor, int px, int py) {
+  Obj(int plado, int paltura, color pcor, int px, int py, PImage pimg) {
     this.lado = plado;
     this.altura = paltura;
     this.cor = pcor;
     this.posicaoX = px;
     this.posicaoY = py;
+    this.img = pimg;
   }
   public void setPosition(int x, int y) {
     this.posicaoX = x;
@@ -26,16 +28,19 @@ class Obj {
     return this.cor;
   }
   public void axou() {
-    rect(this.posicaoX, this.posicaoY, this.lado, this.altura);
+    //rect(this.posicaoX, this.posicaoY, this.lado, this.altura);
+    image(this.img, this.posicaoX, this.posicaoY);
   }
 }
 
 ArrayList <Obj> arrayObj = new ArrayList <Obj> ();
+PImage img;
 
 void setup() {
   size(displayWidth, displayHeight);
   textSize(42);
   rectMode(CENTER);
+  img = loadImage("passarin.png");
 }
 
 void draw() {
@@ -49,7 +54,7 @@ void draw() {
     }
     else {
        arrayObj.get(n).setPosition(x, y+10);
-       fill(arrayObj.get(n).getCor());
+       //fill(arrayObj.get(n).getCor());
        arrayObj.get(n).axou();
     }
   }
@@ -59,5 +64,5 @@ void mousePressed() {
   float r = random(.0f, 255.0f); 
   float g = random(.0f, 255.0f);
   float b = random(.0f, 255.0f);
-  arrayObj.add(new Obj(150, 150, color(r, g, b), mouseX, mouseY));
+  arrayObj.add(new Obj(150, 150, color(r, g, b), mouseX, mouseY, img));
 }
